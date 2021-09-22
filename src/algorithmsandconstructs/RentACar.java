@@ -16,12 +16,10 @@ public class RentACar implements RentACarInterface{
     
     private List<CarInterface> cars;
     private String name;
-    private int numberOfCars;
-    
-    public RentACar(List<CarInterface> cars, String name, int numberOfCars) {
+
+    public RentACar(List<CarInterface> cars, String name) {
         this.cars = cars;
         this.name = name;
-        this.numberOfCars = numberOfCars;
     }
 
     @Override
