@@ -16,19 +16,23 @@ public class Car implements CarInterface{
     
     private Make make;
     private Double rate;
-    private Map<Month, boolean[]> availability;
+    private Map<Month, boolean[]> availabilityMap;
     private int id;
     
-    public Car(Make make, Double rate, Map<Month, boolean[]> availability, int id) {
+    public Car(Make make, Double rate, int id) {
         this.make = make;
         this.rate = rate;
-        this.availability = availability;
         this.id = id;
+        
+        //creating availabillty
+        
     }
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        return null;
     }
 
     @Override
