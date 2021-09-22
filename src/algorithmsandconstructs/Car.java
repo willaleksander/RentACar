@@ -13,6 +13,11 @@ import java.util.Map;
  */
 
 public class Car implements CarInterface{
+    
+    private Make make;
+    private Double rate;
+    private Map<Month, boolean[]> availability;
+    private int id;
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
