@@ -15,64 +15,43 @@ public class BookingSystem implements BookingSystemInterface{
 
     @Override
     public RentACarInterface setupRentACar(BufferedReader in) throws IOException {
-        Make make;
         String name = in.readLine();
-        double rate;
+        String line;
+        Make make = null;
+        double rate = 0;
         int id = 1;
-        int availability;
 
+        ArrayList<CarInterface> cars = new ArrayList<>();
         
+        //loop to go line by line
+        line = in.readLine();
+        while(line != null){
 
-        RentACarInterface rentACarInt = new RentACar( , name);
+            String[] arrOfStr = name.split(":", 3);
 
-        
+            make = Make.parse(arrOfStr[0]);
+            rate = Double.parseDouble(arrOfStr[1]);
+            int availability = Integer.parseInt(arrOfStr[2]);
 
-        String[] arrOfStr = brand.split(":", 3)
 
-        make = arrOfStr[0];
-        rate = arrOfStr[1];
-        availability = arrOfStr[2];
+            //loop to create a new car 
+            for(int i = 0; i < availability; i++){
+                
+                Car carsMade = new Car(make, rate, id);
+               cars.add(carsMade);
 
-        for (int i = 0)
-        Car car = new Car(make, rate, id); //class car is done
-        id +=1;
+      
+                id++;
+            }
 
-        RentACar rentACar = new RentACar(); 
-
-        List<CarInterface> cars = new ArrayList<CarInterface>();
-
-        //start class rent a car
-
-        for(int i = 0; i < id; i++){
-            cars.add(car);
+            line = in.readLine();   
         }
 
+        RentACarInterface rentACarInt = new RentACar(cars , name);
 
-
-
-
-
-
-
-     //public RentACar(List<CarInterface> cars, String name, int numberOfCars) {
-    //     this.cars = cars;
-    //     this.name = name;
-    //     this.numberOfCars = numberOfCars;
-    // }
-
-//public Car(Make make, Double rate, int id)
         
-//while to skip a line to another
-//forloop from 0 to the end of availability
-
-// while(make != null){
-        //     for(int i = 0; i < availability; i++){
-        //     List<CarInterface> cars = new ArrayList<CarInterface>();
-        //     }
-        // }
-
-
-
+return rentACarInt;
+    
     }
     
 }
