@@ -15,64 +15,43 @@ public class BookingSystem implements BookingSystemInterface{
 
     @Override
     public RentACarInterface setupRentACar(BufferedReader in) throws IOException {
-        Make make;
         String name = in.readLine();
+        String line;
+        Make make;
         double rate;
         int id = 1;
-        int availability;
 
-        
+                ArrayList<CarInterface> cars = new ArrayList<>();
 
-        RentACarInterface rentACarInt = new RentACar( , name);
 
-        
+        //loop to go line by line
+        line = in.readLine();
+        while(line != null){
 
-        String[] arrOfStr = brand.split(":", 3)
+            String[] arrOfStr = name.split(":", 3);
 
-        make = arrOfStr[0];
-        rate = arrOfStr[1];
-        availability = arrOfStr[2];
+            make = arrOfStr[0];
+            rate = arrOfStr[1];
+            availability = arrOfStr[2];
 
-        for (int i = 0)
-        Car car = new Car(make, rate, id); //class car is done
-        id +=1;
 
-        RentACar rentACar = new RentACar(); 
+            //loop to create a new car 
+            for(int i = 0; i < availability; i++){
 
-        List<CarInterface> cars = new ArrayList<CarInterface>();
 
-        //start class rent a car
+                cars.add(Car car = new Car(make, rate, id));
+                id++;
+            }
 
-        for(int i = 0; i < id; i++){
-            cars.add(car);
+            line = in.readLine();   
         }
 
 
+        RentACarInterface rentACarInt = new RentACar(cars , name);
 
-
-
-
-
-
-     //public RentACar(List<CarInterface> cars, String name, int numberOfCars) {
-    //     this.cars = cars;
-    //     this.name = name;
-    //     this.numberOfCars = numberOfCars;
-    // }
-
-//public Car(Make make, Double rate, int id)
         
-//while to skip a line to another
-//forloop from 0 to the end of availability
 
-// while(make != null){
-        //     for(int i = 0; i < availability; i++){
-        //     List<CarInterface> cars = new ArrayList<CarInterface>();
-        //     }
-        // }
-
-
-
+    
     }
     
 }
