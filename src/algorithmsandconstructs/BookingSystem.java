@@ -17,40 +17,40 @@ public class BookingSystem implements BookingSystemInterface{
     public RentACarInterface setupRentACar(BufferedReader in) throws IOException {
         String name = in.readLine();
         String line;
-        Make make;
-        double rate;
+        Make make = null;
+        double rate = 0;
         int id = 1;
 
-                ArrayList<CarInterface> cars = new ArrayList<>();
-
-
+        ArrayList<CarInterface> cars = new ArrayList<>();
+        
         //loop to go line by line
         line = in.readLine();
         while(line != null){
 
             String[] arrOfStr = name.split(":", 3);
 
-            make = arrOfStr[0];
-            rate = arrOfStr[1];
-            availability = arrOfStr[2];
+            make = Make.parse(arrOfStr[0]);
+            rate = Double.parseDouble(arrOfStr[1]);
+            int availability = Integer.parseInt(arrOfStr[2]);
 
 
             //loop to create a new car 
             for(int i = 0; i < availability; i++){
+                
+                Car carsMade = new Car(make, rate, id);
+               cars.add(carsMade);
 
-
-                cars.add(Car car = new Car(make, rate, id));
+      
                 id++;
             }
 
             line = in.readLine();   
         }
 
-
         RentACarInterface rentACarInt = new RentACar(cars , name);
 
         
-
+return rentACarInt;
     
     }
     
