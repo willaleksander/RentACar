@@ -44,22 +44,44 @@ public class RentACar implements RentACarInterface{
 
     @Override
     public boolean checkAvailability(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (CarInterface car : this.cars){
+            for (int i = day; i <= day+lengthOfRent; i++){
+                if(!car.isAvailable(month, i)){
+                    return false;
+                }
+            }                
+        }
+        return true;
     }
 
     @Override
     public int getCarAvailable(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = 0;
+        for (CarInterface car : this.cars){
+            if (checkAvailability(month, day, make, lengthOfRent) ){
+                id = car.getId();
+            }
+        }
+        return id;
     }
 
     @Override
     public boolean bookCar(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (CarInterface car : this.cars){
+            if (checkAvailability(month, day, make, lengthOfRent) ){
+                for (int i = day; i <= day + lengthOfRent; i++ ){
+                    car.book(month, day);
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public int getNumberOfCars() {
-        return this.numberOfCars;
+        return this.cars.size();
     }
     
 }
