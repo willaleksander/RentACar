@@ -5,6 +5,8 @@ package algorithmsandconstructs;
 
 import algorithmsandconstructs.enums.Make;
 import algorithmsandconstructs.enums.Month;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,23 +18,31 @@ public class Car implements CarInterface{
     
     private Make make;
     private Double rate;
-    private Map<Month, boolean[]> availabilityMap;
+    private Map<Month, boolean[]> availability;
     private int id;
     
     public Car(Make make, Double rate, int id) {
         this.make = make;
         this.rate = rate;
-        this.id = id;
-        
-        //creating availabillty
-        
+        this.availability = createAvailability();
+        this.id = id;        
     }
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
+        HashMap<Month, boolean[]> availabilities = new HashMap<Month, boolean[]>();
         
-        
-        return null;
+        for (Month month : Month.values()){
+            boolean[] days = new boolean[month.getNumberOfDays()];
+            
+            /* filling a array with the same values
+                https://www.tutorialspoint.com/how-can-we-initialize-a-boolean-array-in-java
+            */
+            Arrays.fill(days, true);
+            
+            availabilities.put(month, days);
+        }
+        return availabilities;
     }
 
     @Override
@@ -57,12 +67,12 @@ public class Car implements CarInterface{
 
     @Override
     public Map<Month, boolean[]> getAvailability() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return availability;
     }
 
     @Override
     public void setAvailability(Map<Month, boolean[]> availability) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.availability = availability;
     }
 
     @Override
@@ -72,12 +82,16 @@ public class Car implements CarInterface{
 
     @Override
     public boolean isAvailable(Month month, int day) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.availability.get(month)[day-1];
     }
 
     @Override
     public boolean book(Month month, int day) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isAvailable(month, day)){
+            this.availability.get(month)[day-1] = false;
+            return true;
+        }
+        return false;
     }
     
 }
